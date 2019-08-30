@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Landing Page for Ben's 30th Birthday">
+  <meta name="author" content="Benjamin Keen">
+
+  <title>You're Invited! Ben's 30th Birthday</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Alex+Brush:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="{{url_for('static', filename='css/fontawesome-all.min.css')}}" rel="stylesheet" type="text/css">
+  <link runat="server" rel="shortcut icon" href="{{url_for('static', filename='img/favicon.ico')}}" type="image/x-icon"/>
+  <link runat="server" rel="icon" href="{{url_for('static', filename='img/favicon.ico')}}" type="image/ico"/>
+
+  <!-- Custom styles for this template -->
+  <link href="{{url_for('static', filename='css/landing.css')}}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="overlay"></div>
+  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="{{url_for('static', filename='mov/bg3.mp4')}}" type="video/mp4">
+  </video>
+
+  <div class="masthead">
+    <div class="masthead-bg"></div>
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-12 my-auto">
+          <div class="masthead-content text-white py-5 py-md-0">
+            <h1 class="mb-3">You're invited!</h1>
+            <p class="mb-5">You're invited to Ben's 30th birthday party on 
+              <strong>4th April 2020</strong>! Log-in for details and to RSVP using the form below</p>
+            {% if data.email_not_found %}
+              <div class="alert alert-danger" role="alert">
+                Couldn't find {{ data.email_attempted }} please try again.
+              </div>
+            {% endif %}
+            <form role="form" action="{{url_for('home')}}" method="post" id="login-form">
+              <div class="input-group input-group-newsletter">
+                <input type="email" class="form-control" placeholder="Enter email..." aria-label="Enter email..." aria-describedby="basic-addon" id="email-entry" name="email" required>
+                <div class="input-group-append">
+                  <button class="btn btn-secondary" type="submit">Log In</button>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="masthead-content text-white py-20 py-md-0">
+          </br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="social-icons">
+    <ul class="list-unstyled text-center mb-3">
+      <li class="list-unstyled-item">
+            <img src="{{url_for('static', filename='img/ben_circle.png')}}" width=70px>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/coming-soon.min.js"></script>
+
+</body>
+
+</html>

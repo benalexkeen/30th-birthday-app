@@ -1,0 +1,169 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Admin Page for Ben's 30th Birthday">
+    <meta name="author" content="Benjamin Keen">
+
+    <title>Ben's 30th Birthday Admin Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alex+Brush:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" rel="stylesheet">
+    <link runat="server" rel="shortcut icon" href="{{url_for('static', filename='img/favicon.ico')}}" type="image/x-icon"/>
+    <link runat="server" rel="icon" href="{{url_for('static', filename='img/favicon.ico')}}" type="image/ico"/>
+  </head>
+  <body>
+     <!-- Navigation -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">Admin Page</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('home')}}">Home
+                  
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('admin_page')}}">Admin
+                    <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('logout')}}">Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Page Content -->
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            {% if data.message %}
+              {% if data.success %}
+              <div class="alert alert-success mt-5" role="alert">
+                {{data.message}}
+              </div>
+              {% else %}
+              <div class="alert alert-danger mt-5" role="alert">
+                {{data.message}}
+              </div>
+              {% endif %}
+            {% endif %}
+          </div>
+          <div class="col-lg-12 text-center">
+            <h1 class="mt-5">Invitees</h1>
+            <p class="mb-3">There are {{data.invited}} people invited: {{data.no_reply}} are yet to reply, {{data.attending}} are attending and {{data.not_attending}} are not attending</p>
+            {% for group in data.attendees %}
+            <h4 class="mt-3 mb-1">Group {{ group[0]['group_id'] }}</h4>
+            <form role="form" action="{{url_for('admin_page')}}" method="post" id="group-{{group}}-form">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">RSVP</th>
+                  <th scope="col">Dietary Req's</th>
+                  <th scope="col">Email sent</th>
+                  <th scope="col">Send Email</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for attendee in group %}
+                <tr>
+                  <th scope="row" width=5%>{{ attendee._id }}</th>
+                  <td width=10%>{{ attendee.first_name }}</td>
+                  <td width=10%>{{ attendee.last_name }}</td>
+                  <td width=25%>
+                    {% if attendee.email_address is not none %}
+                      <input class="form-control" name="email-{{attendee._id}}" type="text" value="{{ attendee.email_address }}" placeholder="Email">
+                    {% else %}
+                    <input class="form-control" name="email-{{attendee._id}}" type="text">
+                    {% endif %}
+                  </td>
+                  <td width=10%>
+                    <select class="form-control" name='attendance-{{attendee._id}}'>
+                      {% if attendee.rsvp == 0 %}
+                      <option value='0' selected='selected'>No RSVP</option>
+                      {% else %}
+                      <option value='0'>No RSVP</option>
+                      {% endif %}
+                      {% if attendee.rsvp == 1%}
+                      <option value='1' selected='selected'>Yes</option>
+                      {% else %}
+                      <option value='1'>Yes</option>
+                      {% endif %}
+                      {% if attendee.rsvp == 2%}
+                      <option value='2' selected='selected'>No</option>
+                      {% else %}
+                      <option value='2'>No</option>
+                      {% endif %}
+                    </select>
+                  </td>
+                  <td width=10%>{{ attendee.dietary_reqs }}</td>
+                  <td width=10%>{{ attendee.invite_sent }}</td>
+                  <td width=10%>
+                    {% if attendee.email_address is not none %}
+                    <a href="{{url_for('send_invite', attendee_id=attendee._id)}}"><button type="button" class="btn btn-secondary">Send</button></a>
+                    {% endif %}
+                  </td>
+                  <td width=10%><a href="{{url_for('delete', attendee_id=attendee._id)}}"><button type="button" class="btn btn-danger">Delete</button></a></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary mb-5">Update</button>
+            </form>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 mx-auto text-center">
+            <form role="form" action="{{url_for('new_attendee')}}" method="post" id="new-attendee-form">
+            <h4 class="mt-3 mb-1">New Attendee</h4>
+            <div class="form-group">
+              <label for="first_name_new_attendee">First Name</label>
+              <input type="text" class="form-control" id="first_name_new_attendee" name="first_name" required>
+            </div>
+            <div class="form-group">
+              <label for="last_name_new_attendee">Last Name</label>
+              <input type="text" class="form-control" id="last_name_new_attendee" name="last_name">
+            </div>
+            <div class="form-group">
+              <label for="email_address_new_attendee">Email Address</label>
+              <input type="email" class="form-control" id="email_address_new_attendee" name="email_address">
+            </div>
+            <div class="form-group">
+            <label for="groupIDSelect">Group &#35;</label>
+            <select class="form-control" id="groupIDSelect" name='group_id'>
+              <option value='new' selected='selected'>New Group</option>
+              {% for group_id in data.group_ids %}
+                <option value='{{group_id}}'>Group {{group_id}}</option>
+              {% endfor %}
+            </select>
+          </div>
+            <button type="submit" class="btn btn-primary mb-5">Create</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="{{url_for('static', filename='js/jquery.easing.min.js')}}"></script>
+  </body>
+</html>

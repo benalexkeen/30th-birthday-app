@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Invitation Page for Ben's 30th Birthday">
+  <meta name="author" content="Benjamin Keen">
+
+  <title>You're Invited! Ben's 30th Birthday</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{url_for('static', filename='css/bootstrap.min.css')}}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Alex+Brush:300,300i,400,400i,700,700i,900,900i" rel="stylesheet" rel="stylesheet">
+  <link href="{{url_for('static', filename='css/fontawesome-all.min.css')}}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{{url_for('static', filename='css/invite.css')}}" rel="stylesheet">
+  <link runat="server" rel="shortcut icon" href="{{url_for('static', filename='img/favicon.ico')}}" type="image/x-icon"/>
+  <link runat="server" rel="icon" href="{{url_for('static', filename='img/favicon.ico')}}" type="image/ico"/>
+
+</head>
+
+<body id="page-top">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+    <a class="navbar-brand js-scroll-trigger" href="#page-top">
+      <span class="d-block d-lg-none">Ben's 30th</span>
+      <span class="d-none d-lg-block">
+        <img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="{{url_for('static', filename='img/ben_circle2_bw.png')}}" alt="">
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#invite">Invite</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#rsvp">RSVP</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#directions">Getting There</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#accommodation">Accommodation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#about">About Me</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link js-scroll-trigger" href="#contact">Contact Me</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container-fluid p-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="invite">
+      <div class="w-100">
+        <h2 class="mb-0">
+          Ben's <span class="text-primary">30th</span> Birthday
+        </h2>
+        <div class="subheading mb-5">
+          Saturday 4<sup>th</sup> April 2020</br>
+          Hallmark Hotel Croydon Aerodrome · Purley Way · Croydon · CR9 4LT
+        </div>
+        {% if data.updated %}
+          <div class="alert alert-success" role="alert">
+            RSVP status updated successfully!
+          </div>
+        {% endif %}
+        <div class="container">
+          <div class="row">
+            <div class="col-md">
+              <p class="lead mb-3">Hi {{ data.user_data.first_name }},</p>
+              <p class="lead mb-5">Ben turns 30 on the 5<sup>th</sup> April 2020. You are invited to join him in celebrating this occasion at the Hallmark Hotel Croydon Aerodrome on Saturday 4<sup>th</sup> April 2020 at 7:30pm.</p>
+              
+              <div class="dropdown mb-5">
+                <button class="dropbtn btn">Add to Calendar</button>
+                <div class="dropdown-content">
+                  <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Ben%20Keen%E2%80%99s%2030th%20Birthday%20Party&dates=20200404T183000Z/20200404T225900Z&details=Ben%20Keen%E2%80%99s%2030th%20Birthday%20Party%20at%20Croydon%20Aerodrome%20Hallmark%20Hotel%20on%20Purley%20Way,%20Croydon.%0A%0APlease%20make%20sure%20you%27ve%20RSVP%27d%20at%20https://bens30th.com.&location=Hallmark%20Hotel%20Croydon%20Aerodrome,%20680%20Purley%20Way,%20Croydon,%20CR9%204LT&sprop=&sprop=name:" target="_blank"><i class="fab fa-google"></i> Google </a>
+                  <a href="http://calendar.yahoo.com/?v=60&view=d&type=20&title=Ben%20Keen%E2%80%99s%2030th%20Birthday%20Party&st=20200404T183000Z&dur=0429&desc=Ben%20Keen%E2%80%99s%2030th%20Birthday%20Party%20at%20Croydon%20Aerodrome%20Hallmark%20Hotel%20on%20Purley%20Way,%20Croydon.%0A%0APlease%20make%20sure%20you%27ve%20RSVP%27d%20at%20https://bens30th.com.&in_loc=Hallmark%20Hotel%20Croydon%20Aerodrome,%20680%20Purley%20Way,%20Croydon,%20CR9%204LT" target="_blank"><i class="fab fa-yahoo"></i> Yahoo</a>
+                  <a href="{{url_for('static', filename='ics/outlook-invite.ics')}}"><i class="fab fa-microsoft"></i> Outlook</a>
+                  <a href="{{url_for('static', filename='ics/android-invite.ics')}}"><i class="fab fa-android"></i> Calendar</a>
+                  <a href="{{url_for('static', filename='ics/iCal-invite.ics')}}"><i class="fab fa-apple"></i> iCal</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <img class="hotel-img" src="{{url_for('static', filename='img/hallmark_hotel.jpg')}}" width=300px>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex justify-content-center" id="rsvp">
+      <div class="w-100">
+        <h2 class="mb-5">R.S.V.P.</h2>
+
+        <div class="subheading s.subheading-small-block">
+          Please RSVP by 28<sup>th</sup> February 2020 
+        </div>
+        <form role="form" action="{{url_for('rsvp')}}" method="post" id="rsvp-form">
+          {% for attendee in data.group_data %}
+          <div class="resume-item d-flex flex-column flex-md-row justify-content-between mt-5">
+            <p class="lead">{{ attendee.first_name }} {% if attendee.last_name is not none %}{{attendee.last_name}}{% endif %}</p>
+          </div>
+          <div class="form-group">
+            <label for="attendenceSelect">Attendance</label>
+            <select class="form-control" id="attendenceSelect" name='attendance-{{attendee._id}}'>
+              {% if attendee.rsvp == 0 %}
+              <option value='0' selected='selected'>No RSVP Entered</option>
+              {% endif %}
+              {% if attendee.rsvp == 1%}
+              <option value='1' selected='selected'>Will be attending</option>
+              {% else %}
+              <option value='1'>Will be attending</option>
+              {% endif %}
+              {% if attendee.rsvp == 2%}
+              <option value='2' selected='selected'>Will not be attending</option>
+              {% else %}
+              <option value='2'>Will not be attending</option>
+              {% endif %}
+            </select>
+          </div>
+          {% if attendee.dietary_reqs %}
+          <input class="form-control" name="dietary-reqs-{{attendee._id}}" type="text" value="{{ attendee.dietary_reqs }}" placeholder="Dietary Requirements">
+          {% else %}
+          <input class="form-control" name="dietary-reqs-{{attendee._id}}" type="text" placeholder="Dietary Requirements">
+          {% endif %}
+          {% endfor %}
+          <button type="submit" class="btn btn-primary mt-5">Update RSVP</button>
+        </form>
+      </div>
+
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="directions">
+      <div class="w-100">
+        <h2 class="mb-5">Getting There</h2>
+        <div class="subheading mb-3">Hallmark Hotel Croydon Aerodrome</div>
+        <p> There is on-site parking at the Hallmark Hotel </p>
+        <div class="resume-item d-flex flex-column flex-md-row justify-content-between mb-5">
+        <div id="map"></div>
+        </div>
+
+        
+        <p class="lead"><i class="fa fa-train"></i> Train</p>
+        <p> The Hallmark Hotel Croydon Aerodrome is a 15 minute walk from Waddon Train Station, a 10 minute taxi ride from East or West Croydon Train Stations, or a 5 minute taxi ride from Purley Train Station. </p>
+        <p class="lead"><i class="fa fa-bus"></i> Bus</p>
+        <p> The Hallmark Hotel Croydon Aerodrome is served by the 119 or 289 buses. Use <a href="https://tfl.gov.uk/plan-a-journey/" target="_blank">TfL Journey Planner</a> for more detailed information about getting there by bus. </p>
+        <p class="lead"><i class="fa fa-plane"></i> Aeroplane</p>
+        <p> The hotel is a 30 minute taxi ride from Gatwick Airport.</p>
+
+        <div class="subheading mb-3"><i class="fa fa-taxi"></i> Taxi</div>
+        <ul class="fa-ul mb-3">
+          <li>
+            <i class="fa-li fa fa-taxi text-warning"></i>
+            <a href="https://m.uber.com/ul/?client_id=Y6JOEzdiSymBMeKNLiKLOJJq_y30L2t9&action=setPickup&dropoff[latitude]=51.3572543&dropoff[longitude]=-0.1172312&dropoff[nickname]=Hallmark%20Hotel%20Croydon%20Aerodrome&dropoff[formatted_address]=690%20Purley%20Way%20%2CSurrey%2C%20CR9%204LT" target="_blank">Uber to Hallmark Hotel Croydon Aerodrome</a></li>
+          <li>
+            <i class="fa-li fa fa-taxi text-warning"></i>
+            <a href="gett://order?pickup=my_location&dropoff_latitude=51.3572543&&dropoff_longitude=-0.1172312" target="_blank">Black Cab to Hallmark Hotel Croydon Aerodrome using Gett (requires Gett App)</a></li>
+        </ul>
+
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="accommodation">
+      <div class="w-100">
+        <h2 class="mb-5">Accommodation</h2>
+        <p>In addition to the Hallmark Hotel Croydon Aerodrome, there are a number of hotels within a 5-minute walk (literally).</p>
+        <div class="container">
+          <div class="row">
+            <div class="col-md">
+              <div class="subheading mb-2">Hallmark Hotel Croydon Aerodrome</div>
+              <ul class="fa-ul mb-3">
+                <li>
+                  <i class="fa-li fa fa-phone"></i>
+                  <a href="tel:03300283403">0330 028 3403</a></li>
+                <li>
+                  <i class="fa-li fa fa-map-marker-alt"></i>
+                  680 Purley Way, Croydon CR9 4LT</li>
+                <li>
+                  <i class="fa-li fa fa-globe"></i>
+                  <a href='https://www.hallmarkhotels.co.uk/hotels/hallmark-hotel-london-croydon-aerodrome/' target="_blank"> Website</a></li>
+              </ul>
+            </div>
+            <div class="col-md">
+              <img class="hotel-img mb-3" src="{{url_for('static', filename='img/hallmark_hotel1.jpg')}}" height=210px>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="subheading mb-3">Hilton London Croydon</div>
+              <ul class="fa-ul mb-3">
+                <li>
+                  <i class="fa-li fa fa-phone"></i>
+                  <a href="tel:02086803000">020 8680 3000</a></li>
+                <li>
+                  <i class="fa-li fa fa-map-marker-alt"></i>
+                  101 Waddon Way, Purley Way, Croydon CR9 4HH</li>
+                <li>
+                  <i class="fa-li fa fa-globe"></i>
+                  <a href='https://www3.hilton.com/en/hotels/united-kingdom/hilton-london-croydon-CROHNHN/index.html' target="_blank"> Website</a></li>
+              </ul>
+            </div>
+            <div class="col-md">
+              <img class="hotel-img mb-3" src="{{url_for('static', filename='img/hilton_croydon.png')}}" height=210px>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="subheading mb-3">Premier Inn Croydon Purley Way</div>
+              <ul class="fa-ul mb-3">
+                <li>
+                  <i class="fa-li fa fa-phone"></i>
+                  <a href="tel:08715278282">0871 527 8282</a></li>
+                <li>
+                  <i class="fa-li fa fa-map-marker-alt"></i>
+                  619 Purley Way, Croydon CR0 4RQ</li>
+                <li>
+                  <i class="fa-li fa fa-globe"></i>
+                  <a href='https://www.premierinn.com/gb/en/hotels/england/greater-london/london/london-croydon-purley-a23.html' target="_blank"> Website</a></li>
+              </ul>
+            </div>
+            <div class="col-md">
+              <img class="hotel-img mb-3" src="{{url_for('static', filename='img/premier_inn.jpg')}}" height=210px>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="subheading mb-3">Grand Sapphire Hotel Croydon</div>
+              <ul class="fa-ul mb-3">
+                <li>
+                  <i class="fa-li fa fa-phone"></i>
+                  <a href="tel:02086862905">020 8686 2905</a></li>
+                <li>
+                  <i class="fa-li fa fa-map-marker-alt"></i>
+                  45 Imperial Way, Croydon CR0 4RR</li>
+                <li>
+                  <i class="fa-li fa fa-globe"></i>
+                  <a href='http://www.grandsapphire.co.uk/' target="_blank"> Website</a></li>
+              </ul>
+            </div>
+            <div class="col-md">
+                <img class="hotel-img mb-3" src="{{url_for('static', filename='img/grand_sapphire.png')}}" height=210px>
+            </div>
+          </div>
+        </div>
+        
+        
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="about">
+      <div class="w-100">
+        <h2 class="mb-5">About Me</h2>
+        <div class="timeline">
+          <p class="p-timeline"><b>1990: Birth, St Helier Hospital - </b>The beginning of the end, in the words of Douglas Adams - <em>"This has made a lot of people very angry and been widely regarded as a bad move".</em></p>
+          <p class="p-timeline"><b>1995: Primary School, St. Cecilia's - </b>First responsibilities are introduced, things are downhill from here.</p>
+          <p class="p-timeline"><b>2001: High School, John Fisher - </b>Responsibilities begin to grow - have to choose who my top 6 friends on Bebo will be, what my status on MSN will be, and find new and creative ways to avoid playing Rugby.</p>
+          <p class="p-timeline"><b>2006: 6th Form, John Fisher - </b>Surely I should still be getting taller? Oh, no that's it.</p>
+          <p class="p-timeline"><b>2008: University, Southampton Uni -</b> Racked up >20K in debt to attend a <em>lot</em> of fancy dress social events.</p>
+          <p class="p-timeline"><b>2011: Postgrad, GDSC, Sussex -</b> Mastered the art of pipetting accurately and quickly, important life skill learnt, will certainly be using this day-to-day in the future.</p>
+          <p class="p-timeline"><b>2015: First Real Job, Hitachi -</b> Sold my soul to leave cancer research and join a multinational corporation for a chance to earn some money to pay off my student loan.</p>
+          <p class="p-timeline"><b>2019: Second Job, Microsoft -</b> Imposter syndrome in full swing now as I've somehow managed to con another company into thinking I'm competent at my work.</p>
+          <p class="p-timeline"><b>2020: Turning 30 -</b> Seeing off my youth, first grey hairs setting in, slowing metabolism, scared by nightclubs.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="m-0">
+
+    <section class="resume-section p-3 p-lg-5 d-flex align-items-center" id="contact">
+      <div class="w-100">
+        <h2 class="mb-5">Contact Me</h2>
+
+        <div class="subheading .subheading-small-block mb-2">
+        Ben Keen
+        </div>
+
+        <ul class="fa-ul mb-3">
+          <li>
+            <i class="fa-li fa fa-phone text-warning"></i>
+            <a href="tel:07983446151">07983446151</a></li>
+          <li>
+            <i class="fa-li fa fa-envelope text-warning"></i>
+            <a href="mailto:benalexkeen@gmail.com">benalexkeen@gmail.com</a></li>
+        </ul>
+        <div class="social-icons mb-3">
+          <a href="https://www.linkedin.com/in/benalexkeen/">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="https://www.instagram.com/benalexkeen/">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://github.com/benalexkeen">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="http://www.benalexkeen.com">
+            <i class="fa fa-globe"></i>
+          </a>
+        </div>
+      This website is hosted on <a href='https://azure.microsoft.com/en-gb/'><img height=18px src="{{url_for('static', filename='img/azure.png')}}" alt=""></a>
+      </div>
+    </section>
+
+
+  </div>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+  <script src="{{url_for('static', filename='js/bootstrap.bundle.min.js')}}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{{url_for('static', filename='js/jquery.easing.min.js')}}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{{url_for('static', filename='js/rsvp.js')}}"></script>
+
+  <script>
+    // Initialize and add the map
+    function initMap() {
+      // The location of Uluru
+      var hallmarkHotel = {lat: 51.3572543, lng: -0.1172312};
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 10, center: hallmarkHotel});
+      // The marker, positioned at Uluru
+      var marker = new google.maps.Marker({position: hallmarkHotel, map: map});
+    }
+</script>
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnCo18-5qM5OL8caTRSKhPseMJag5K2XE&callback=initMap">
+</script>
+
+
+</body>
+
+</html>

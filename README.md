@@ -1,6 +1,6 @@
 # README
 
-As this was designed as a single use application, it's not the most parameterised but feel free to use it for your own tasks.
+As this was designed as a single use application, it's not the most parameterised but feel free to butcher it and use it for your own tasks as you want.
 
 ## Running Locally
 

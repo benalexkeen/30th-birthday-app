@@ -25,6 +25,8 @@ Then add a single document in the format:
 
 To send out email invites, you'll also need to set up a sendgrid API key and an email address to use as your "from_email".
 
+To show the Google Map, you'll need to have a google maps API key.
+
 Now create a file named `config.json` and add the following contents:
 ```
 {
@@ -33,6 +35,7 @@ Now create a file named `config.json` and add the following contents:
   "cosmos_password": "<cosmos_password>",
   "cosmos_db_name": "<cosmos_db_name>",
   "sendgrid_api_key": "<sendgrid_api_key>",
+  "google_maps_key": "<google_maps_api_key>",
   "from_email": "<from_email>"
 }
 ```

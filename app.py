@@ -333,7 +333,8 @@ def rsvp():
     data = {
         'updated': updated,
         'user_data': user_data,
-        'group_data': group_data
+        'group_data': group_data,
+        'google_maps_key': config['google_maps_key']
     }
     return render_template('rsvp.html', data=data)
 
